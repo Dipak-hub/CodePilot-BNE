@@ -8,7 +8,7 @@ import OtpScreen from '../screen/OtpScreen';
 import HomeScreen from '../screen/HomeScreen.js';
 import SideBar from './SideBar';
 import PostByCategory from '../Component/Post-by-category/Post-By-Category';
-
+import DescriptionScreen from '../screen/DescriptionScreen';
 function Routes() {
     const Stack=createNativeStackNavigator()
   return (
@@ -22,6 +22,7 @@ function Routes() {
         {/* <Stack.Screen name="HomeScreen" component={HomeScreen}/> */}
         <Stack.Screen name="SideBar" component={SideBar} />
         <Stack.Screen name="PostByCategory" component={PostByCategory} />
+       
     </Stack.Navigator>
   </NavigationContainer>
   )

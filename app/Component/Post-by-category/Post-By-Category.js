@@ -1,17 +1,41 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import Header from '../Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPostByCategory } from '../../store'
+import axios from 'axios'
+import { useState } from 'react'
+import { ActivityIndicator } from 'react-native-paper'
+import colors from '../../utils/responsive/colors'
+import NewsCard from '../News-Card/News-Card'
 
 const PostByCategory = ({route}) => {
     const {id,screenName}=route.params
-    const {posts,is_loading}=useSelector((state)=>state.posts)
-    const dispatch=useDispatch()
+    const [posts,setPosts]=useState([])
+    const [page,setPage]=useState(10)
+
+
+    const fetchPostByCategory=async()=>{
+      const res=await axios.get(`https://www.business-northeast.com/wp-json/wp/v2/posts?categories=${id}&_embed&per_page=${page}&filter[orderby]=date&order=desc`)
+     setPosts(res.data)
+    }
+
+    const fetchMoreData=()=>{
+      setPage(page+2)
+     }
+
+    function renderLoader(){
+      return(
+        <View style={styles.ActivityIndicator}>
+        <ActivityIndicator size={'large'} color={colors.primary} />
+      </View>
+      )
+      
+    }
 
     useEffect(()=>{
-      dispatch(getPostByCategory(id))
-    },[])
+      fetchPostByCategory()
+    },[page])
   return (
     <>
     <Header
@@ -20,7 +44,18 @@ const PostByCategory = ({route}) => {
     hasBackButton={true}
     />
     <View>
-      <Text style={{color:'black'}}>Post-By-Category</Text>
+    <FlatList
+    contentContainerStyle={{flexGrow:1}}
+    keyExtractor={item=>item.id}
+    data={posts}
+    renderItem={({item})=>(
+      <NewsCard news={item} />
+    )}
+    ListFooterComponent={renderLoader}
+    onEndReachedThreshold={0.2}
+    onEndReached={fetchMoreData}
+   
+    />
     </View>
     </>
   )
@@ -28,4 +63,9 @@ const PostByCategory = ({route}) => {
 
 export default PostByCategory
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  ActivityIndicator:{
+    marginVertical:45,
+    alignItems:'center'
+  }
+})

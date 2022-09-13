@@ -35,7 +35,7 @@ function Header({hasLogo,hasBackButton,hasDrawer,openDrawer,hasScreenName,screeN
        <Image
        resizeMode='contain'
        style={styles.logo}
-       source={require('../assets/logo_bne.png')}/>
+       source={require('../assets/logo_bne_white.png')}/>
       ):(
         hasScreenName?(
             <Text style={[styles.textStyle,{marginLeft:widthToDp(3),letterSpacing:1.5}]}>{screeName}</Text> 
@@ -59,7 +59,7 @@ const styles=StyleSheet.create({
     logo:{
       color:'white',
       height:heightToDp(4),
-      marginLeft:widthToDp(-20)
+      marginLeft:widthToDp(8)
     },
     textStyle:{
         fontFamily:'open-sans',

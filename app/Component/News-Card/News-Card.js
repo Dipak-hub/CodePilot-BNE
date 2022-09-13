@@ -2,14 +2,17 @@ import { Image, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'reac
 import React from 'react'
 import { heightToDp, scale, widthToDp } from '../../utils'
 import { color } from 'react-native-reanimated'
+import { useNavigation } from '@react-navigation/native'
 
 const NewsCard = ({news}) => {
+    const navigation=useNavigation()
+
     const handlePress=(slug)=>{
-        console.log(slug)
+        navigation.navigate('Description',{slug:slug})
     }
   return (
   
-    <TouchableOpacity onPress={()=>handlePress(news.slug)} style={styles.Container}>
+    <TouchableOpacity onPress={()=>handlePress(news?.slug)} style={styles.Container}>
         <View>
         <Image source={{uri:news?.yoast_head_json?.og_image[0]?.url}} style={styles.image} />
         </View>
@@ -17,6 +20,7 @@ const NewsCard = ({news}) => {
         <Text style={styles.headline}>{news?.title?.rendered}</Text>
         <Text style={styles.textDate}>{ new Date(news?.date).toDateString()}</Text>
         </View>
+      
     </TouchableOpacity>
     
 

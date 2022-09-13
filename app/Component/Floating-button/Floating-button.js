@@ -1,24 +1,70 @@
-import { StyleSheet, Text, View,Animated,TouchableWithoutFeedback} from 'react-native'
+import { StyleSheet, Text, View,Animated,TouchableWithoutFeedback, Image} from 'react-native'
 import React, { useState } from 'react'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { heightToDp, widthToDp } from '../../utils';
 
+
+
+const animation= new Animated.Value(0)
+let open=false;
+
+function toggleMenu(){
+ const toValue=open ? 0 : 1
+
+ Animated.spring(animation,{
+     toValue,
+     friction:5,
+     useNativeDriver: true
+
+ }).start()
+ open=!open
+}
 const Floatingbutton = () => {
 
-    const [open,setOpen]=useState(false)
-   const animation= new Animated.Value(0)
 
-   const toggleMenu=()=>{
-    const toValue=open ? 0 : 1
+    const pinStyle={
+        transform:[
+            
+                {scale:animation},
+                {
+                    translateY: animation.interpolate({
+                        inputRange:[0,1],
+                        outputRange:[0,-80]
+                    })
+                }
+            
+        ]
+    }
 
-    Animated.spring(animation,{
-        toValue,
-        friction:5,
-        useNativeDriver:false,
+    const thumbStyle={
+        transform:[
+            
+                {scale:animation},
+                {
+                    translateY: animation.interpolate({
+                        inputRange:[0,1],
+                        outputRange:[0,-140]
+                    })
+                }
+            
+        ]
+    }
 
-    }).start()
-    setOpen(!open)
-   }
+    const heartStyle={
+        transform:[
+            
+                {scale:animation},
+                {
+                    translateY: animation.interpolate({
+                        inputRange:[0,1],
+                        outputRange:[0,-200]
+                    })
+                }
+            
+        ]
+    }
+   
    const rotation={
     transform:[
         {
@@ -32,23 +78,23 @@ const Floatingbutton = () => {
   return (
     <View style={styles.container}>
          <TouchableWithoutFeedback>
-        <Animated.View style={[styles.button,styles.secondary]}>
+        <Animated.View style={[styles.button,styles.secondary,heartStyle]}>
            <MaterialCommunityIcons name='whatsapp' color={'#c23c45'} size={30}/>
         </Animated.View>
     </TouchableWithoutFeedback>
     <TouchableWithoutFeedback>
-        <Animated.View style={[styles.button,styles.secondary]}>
+        <Animated.View style={[styles.button,styles.secondary,thumbStyle]}>
            <MaterialCommunityIcons name='facebook' color={'#c23c45'} size={30}/>
         </Animated.View>
     </TouchableWithoutFeedback>
     <TouchableWithoutFeedback>
-        <Animated.View style={[styles.button,styles.secondary]}>
+        <Animated.View style={[styles.button,styles.secondary,pinStyle]}>
            <MaterialCommunityIcons name='twitter' color={'#c23c45'} size={30}/>
         </Animated.View>
     </TouchableWithoutFeedback>
     <TouchableWithoutFeedback onPress={()=>toggleMenu()}>
         <Animated.View style={[styles.button,styles.menu,rotation]}>
-           <MaterialCommunityIcons name='plus-circle' color={'#c23c45'} size={45}/>
+          <Image source={require('../../assets/fab.png')} style={{height:heightToDp(10),width:widthToDp(25)}} />
         </Animated.View>
     </TouchableWithoutFeedback>
     </View>

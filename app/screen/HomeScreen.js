@@ -1,9 +1,11 @@
 import { fontSize } from '@mui/system';
+import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { setUseProxies } from 'immer';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import { ActivityIndicator } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,6 +41,12 @@ function HomeScreen({navigation}) {
    setPage(page+1)
   }
 
+function renderYoutube(){
+  return(
+    <YoutubeComponent />
+  )
+}
+
   function renderLoader(){
     return(
 <View style={styles.ActivityIndicator}>
@@ -60,12 +68,9 @@ function HomeScreen({navigation}) {
   },[page])
 
 
-
   return (
     <>
-
-  <YoutubeComponent />
-
+<SafeAreaView style={{flex: 1}}>
     <FlatList
     contentContainerStyle={{flexGrow:1}}
     keyExtractor={item=>item.id}
@@ -76,13 +81,15 @@ function HomeScreen({navigation}) {
     ListFooterComponent={renderLoader}
     onEndReachedThreshold={0}
     onEndReached={fetchMoreData}
+    ListHeaderComponent={renderYoutube}
     refreshing={refresh}
     onRefresh={handleRefresh}
    
     />
-
+    </SafeAreaView>
   
     <Floatingbutton/>
+
 
      </>
   )
