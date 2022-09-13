@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Header from '../Component/Header'
 import { login } from '../store/slice/auth-slice'
 import { heightToDp, scale, widthToDp } from '../utils'
+import colors from '../utils/responsive/colors'
 
 function OtpScreen() {
 
@@ -18,8 +19,11 @@ function OtpScreen() {
     setBottomBorderColor('green')
   }
   const handleChange=num=>{
+  console.log(num.length)
+
   if(num.length===6){
     setOtp(num)
+    Keyboard.dismiss()
   }
   }
 
@@ -30,7 +34,7 @@ function OtpScreen() {
         routes: [{name:'SideBar'}],
       });
     }).catch((e)=>{
-     alert('Something went wrong!!!!')
+     alert('Incorrect OTP!!!!')
     })
   }
  
@@ -80,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '95%',
     height: heightToDp(6),
-    backgroundColor: '#c23c45',
+    backgroundColor:colors.primary,
     alignItems: 'center',
   },
   buttonText: {

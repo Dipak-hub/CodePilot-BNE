@@ -38,7 +38,7 @@ function SplashScreen() {
     <View style={styles.container}>
       <Image
       style={styles.image}
-      source={require('../assets/logo_bne.jpg')}
+      source={require('../assets/logo_bne_white.jpg')}
       resizeMode='contain'
       />
         </View>
@@ -49,7 +49,8 @@ function SplashScreen() {
 const styles=StyleSheet.create({
   container:{
     flex:1,
-    justifyContent:'center'
+    justifyContent:'center',
+    alignItems:'center'
   },
   image:{
     width:widthToDp(80),

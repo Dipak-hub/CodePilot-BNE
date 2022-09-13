@@ -10,6 +10,7 @@ import Northeast from '../Component/Top-Screens/Northeast'
 import National from '../Component/Top-Screens/National';
 import International from '../Component/Top-Screens/International'
 import { widthToDp } from '../utils';
+import colors from '../utils/responsive/colors';
 
 const Tab = createMaterialTopTabNavigator();
 function TopTabNavigator() {
@@ -20,7 +21,7 @@ function TopTabNavigator() {
       tabBarItemStyle: { width: widthToDp(28) },
       tabBarScrollEnabled:true,
       tabBarIndicatorStyle:{
-        backgroundColor:'#c23c45'
+        backgroundColor:colors.primary
       }
     }}
     >

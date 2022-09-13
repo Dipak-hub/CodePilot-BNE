@@ -3,6 +3,7 @@ import React from 'react'
 import { View,Text, StyleSheet, Image ,TouchableOpacity} from 'react-native'
 import {Appbar} from 'react-native-paper'
 import { heightToDp, scale, widthToDp } from '../utils'
+import colors from '../utils/responsive/colors'
 
 function Header({hasLogo,hasBackButton,hasDrawer,openDrawer,hasScreenName,screeName}) {
  
@@ -53,7 +54,7 @@ const styles=StyleSheet.create({
       alignItems: 'center',
       height: heightToDp(6),
       width: widthToDp(100),
-    backgroundColor:'#c23c45',
+    backgroundColor:colors.primary,
     },
     logo:{
       color:'white',

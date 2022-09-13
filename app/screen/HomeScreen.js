@@ -1,27 +1,87 @@
 import { fontSize } from '@mui/system';
+import axios from 'axios';
+import { setUseProxies } from 'immer';
 import React, { useEffect } from 'react'
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux';
 import Floatingbutton from '../Component/Floating-button/Floating-button';
-import { getCategories } from '../store';
+import NewsCard from '../Component/News-Card/News-Card';
+import YoutubeComponent from '../Component/Youtube-Component/Youtube-Component';
+import { getAllPosts, getCategories } from '../store';
+import colors from '../utils/responsive/colors';
 
 function HomeScreen({navigation}) {
+
+
+
+  const fetchPosts=async()=>{
+    const res= await axios.get(`https://www.business-northeast.com/wp-json/wp/v2/posts?per_page=20&page=${page}&_embed`)
+    setAllPosts([...allPosts,...res.data])
+  }
+ 
+
   const openDrawer = () => {
     navigation.dispatch(DrawerActions.openDrawer());
     // navigation.setOptions({tabBarStyle: {display: 'none'}});
   };
   const dispatch=useDispatch()
+  const [page,setPage]=useState(1)
+  const [refresh,setRefresh]=useState(false)
 
   const {categories,is_loading,}=useSelector((state)=>state.categories)
+  
+  const [allPosts,setAllPosts]=useState([])
+
+   const fetchMoreData=()=>{
+   setPage(page+1)
+  }
+
+  function renderLoader(){
+    return(
+<View style={styles.ActivityIndicator}>
+      <ActivityIndicator size={'large'} color={colors.primary} />
+    </View>
+    )
+    
+  }
+  const handleRefresh=async()=>{
+    setRefresh(true)
+    const res= await axios.get(`https://www.business-northeast.com/wp-json/wp/v2/posts?per_page=20&page=${page}&_embed`)
+   setAllPosts(res.data)
+   setRefresh(false)
+  }
 
   useEffect(()=>{
     dispatch(getCategories())
-  },[])
+    fetchPosts()
+  },[page])
+
 
 
   return (
     <>
+
+  <YoutubeComponent />
+
+    <FlatList
+    contentContainerStyle={{flexGrow:1}}
+    keyExtractor={item=>item.id}
+    data={allPosts}
+    renderItem={({item})=>(
+      <NewsCard news={item} />
+    )}
+    ListFooterComponent={renderLoader}
+    onEndReachedThreshold={0}
+    onEndReached={fetchMoreData}
+    refreshing={refresh}
+    onRefresh={handleRefresh}
+   
+    />
+
+  
     <Floatingbutton/>
 
      </>
@@ -33,6 +93,10 @@ const styles = StyleSheet.create({
     height: 22,
     color: 'white',
   },
+  ActivityIndicator:{
+    marginVertical:16,
+    alignItems:'center'
+  }
 });
 
 export default HomeScreen

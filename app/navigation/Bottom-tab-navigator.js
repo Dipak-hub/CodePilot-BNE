@@ -4,11 +4,13 @@ import HomeScreen from '../screen/HomeScreen'
 import AboutScreen from '../screen/AboutScreen';
 import ContactScreen from '../screen/ContactScreen';
 import { DrawerActions, NavigationContainer } from '@react-navigation/native';
-import { heightToDp } from '../utils';
+import { heightToDp, widthToDp } from '../utils';
 import TopTabNavigator from './Top-tab-navigator';
 import Header from '../Component/Header';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import colors from '../utils/responsive/colors';
+import { StyleSheet, Text, View } from 'react-native';
 
 
 
@@ -31,7 +33,7 @@ function BottomTabNavigator({navigation}) {
     <Tab.Navigator
     screenOptions={{
       tabBarStyle:{
-        backgroundColor:'#c23c45',
+        backgroundColor:colors.primary,
         height:heightToDp(7.5)
       },
       headerShown: false,
@@ -41,7 +43,16 @@ function BottomTabNavigator({navigation}) {
     options={{
       tabBarShowLabel:false,
       tabBarIcon: ({ color, size,focused }) => (
-        <MaterialCommunityIcons name="home" color='white' size={20} />
+        focused?(
+          <>
+          <View style={styles.iconContainerFocused}>
+          <MaterialCommunityIcons name="home" color='white' size={20} />
+          <Text style={{color:'white',marginLeft:widthToDp(2)}}>Home</Text>
+          </View>
+          </>
+        ):(
+          <MaterialCommunityIcons name="home" color='white' size={20} />
+        )
       ),
     }}
       name="Home" component={TopTabNavigator} />
@@ -49,7 +60,18 @@ function BottomTabNavigator({navigation}) {
        options={{
         tabBarShowLabel:false,
         tabBarIcon: ({ color, size,focused }) => (
-          <MaterialCommunityIcons name="information" color='white' size={20} />
+          focused?(
+            <>
+            <View style={styles.iconContainerFocused}>
+            <MaterialCommunityIcons name="information" color='white' size={20} />
+            <Text style={{color:'white',marginLeft:widthToDp(2)}}>About</Text>
+            </View>
+            </>
+          ):(
+            <MaterialCommunityIcons name="information" color='white' size={20} />
+          )
+        
+        
         ),
       }}
        />
@@ -57,7 +79,18 @@ function BottomTabNavigator({navigation}) {
        options={{
         tabBarShowLabel:false,
         tabBarIcon: ({ color, size,focused }) => (
-          <MaterialIcons name="contact-phone" color='white' size={20} />
+
+          focused?(
+            <>
+            <View  style={styles.iconContainerFocused}>
+            <MaterialIcons name="contact-phone" color='white' size={20} />
+            <Text style={{color:'white',marginLeft:widthToDp(2)}}>Contact</Text>
+            </View>
+            </>
+          ):(
+            <MaterialIcons name="contact-phone" color='white' size={20} />
+          )
+      
         ),
       }}
       />
@@ -65,5 +98,8 @@ function BottomTabNavigator({navigation}) {
     </>
   )
 }
+const styles=StyleSheet.create({
+  iconContainerFocused:{backgroundColor:'#bf6b71',width:widthToDp(30),height:heightToDp(4),borderRadius:50,flexDirection:'row',alignItems:'center',justifyContent:'center'}
+})
 
 export default BottomTabNavigator

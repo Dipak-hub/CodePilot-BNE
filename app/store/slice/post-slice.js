@@ -10,6 +10,7 @@ const initialState = {
 //   numberOfPage: "",
 posts: [],
   post: {},
+  all_posts:[]
 };
 
 // get All Booking Complete trip-------------------
@@ -26,6 +27,26 @@ posts: [],
 //     }
 //   }
 // );
+
+
+//Get Post by category
+
+// search posts by categoires-------->
+export const getAllPosts = createAsyncThunk(
+  "get-all-posts",
+  async (page, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`https://www.business-northeast.com/wp-json/wp/v2/posts?per_page=20&page=${page}&_embed`);
+      console.log(page)
+      console.log(response.data[0].id)
+      return response.data
+    } catch (error) {
+      rejectWithValue(error);
+    }
+  }
+);
+
+
 
 // search posts by categoires-------->
 export const getPostByCategory = createAsyncThunk(
@@ -85,6 +106,28 @@ const postsSlice = createSlice({
     //   state.is_loading = true;
     //   state.error_message = null;
     // },
+
+//get all posts
+
+[getAllPosts.fulfilled]: (state, action) => {
+    state.all_posts = [...state.all_posts,...action.payload]
+  //   state.totalPage = action.payload.total;
+  //   state.numberOfPage = action.payload.numberOfPage;
+    state.is_loading = false;
+  },
+  [getAllPosts.rejected]: (state, action) => {
+    state.is_loading = false;
+    state.error_message =
+      action.payload.message || "Something Went Wrong";
+  },
+  [getAllPosts.pending]: (state) => {
+    state.is_loading = true;
+    state.error_message = null;
+  },
+
+
+
+
 
 //// get post by category
 

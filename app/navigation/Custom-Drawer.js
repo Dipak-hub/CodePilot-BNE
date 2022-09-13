@@ -10,6 +10,7 @@ import { authStateClear } from "../store/slice/auth-slice";
 import { heightToDp, scale, widthToDp } from "../utils";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import colors from "../utils/responsive/colors";
 
 function CustomDrawer(props) {
 
@@ -70,7 +71,7 @@ useEffect(()=>{
       flexDirection: 'row',
       alignItems: 'center',
       marginBottom: heightToDp(1),
-      backgroundColor: '#c23c45',
+      backgroundColor: colors.primary,
       paddingHorizontal: widthToDp(4),
       paddingTop: heightToDp(6),
       paddingBottom: heightToDp(2),
@@ -86,7 +87,7 @@ useEffect(()=>{
     },
     logoutButton:{
       flex:1,
-      backgroundColor: '#c23c45',
+      backgroundColor: colors.primary,
     }
   })
 

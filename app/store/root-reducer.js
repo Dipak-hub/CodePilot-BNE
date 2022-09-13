@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {persistReducer} from 'redux-persist';
 import categoriesSlice from './slice/categories-slice';
 import postSlice from './slice/post-slice';
+import storage from 'redux-persist/lib/storage'
 
 const persistConfig = {
   key: 'root',
@@ -36,9 +37,9 @@ const categoriesConfig = {
 const postsConfig = {
   key: "posts",
   version: 1,
-  storage:AsyncStorage,
+  storage:storage,
   keyPrefix: "",
-  blacklist: ["error_message", "error","posts","post"],
+  blacklist: ["error_message", "error","posts","post","all_posts"],
 };
 
 

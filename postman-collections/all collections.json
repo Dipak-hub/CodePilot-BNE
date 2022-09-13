@@ -1,0 +1,214 @@
+{
+	"info": {
+		"_postman_id": "b2006683-e503-41ab-8e43-e68f0374451b",
+		"name": "Business Northeast",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5331630"
+	},
+	"item": [
+		{
+			"name": "Get Posts",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "novo_computing@0070",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.business-northeast.com/wp-json/wp/v2/posts?per_page=20&page=20&_embed",
+					"protocol": "https",
+					"host": [
+						"www",
+						"business-northeast",
+						"com"
+					],
+					"path": [
+						"wp-json",
+						"wp",
+						"v2",
+						"posts"
+					],
+					"query": [
+						{
+							"key": "per_page",
+							"value": "20"
+						},
+						{
+							"key": "page",
+							"value": "20"
+						},
+						{
+							"key": "_embed",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Categories",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "novo_computing@0070",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.business-northeast.com/wp-json/wp/v2/categories?per_page=100",
+					"protocol": "https",
+					"host": [
+						"www",
+						"business-northeast",
+						"com"
+					],
+					"path": [
+						"wp-json",
+						"wp",
+						"v2",
+						"categories"
+					],
+					"query": [
+						{
+							"key": "per_page",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Posts By Category",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "novo_computing@0070",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.business-northeast.com/wp-json/wp/v2/posts?categories=7051&_embed&per_page=10&filter[orderby]=date&order=desc",
+					"protocol": "https",
+					"host": [
+						"www",
+						"business-northeast",
+						"com"
+					],
+					"path": [
+						"wp-json",
+						"wp",
+						"v2",
+						"posts"
+					],
+					"query": [
+						{
+							"key": "categories",
+							"value": "7051"
+						},
+						{
+							"key": "_embed",
+							"value": ""
+						},
+						{
+							"key": "per_page",
+							"value": "10"
+						},
+						{
+							"key": "filter[orderby]",
+							"value": "date"
+						},
+						{
+							"key": "order",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Post Single",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "novo_computing@0070",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.business-northeast.com/wp-json/wp/v2/posts?_embed&slug=spice-sector-plans-to-enhance-its-potential-and-scope-in-assam",
+					"protocol": "https",
+					"host": [
+						"www",
+						"business-northeast",
+						"com"
+					],
+					"path": [
+						"wp-json",
+						"wp",
+						"v2",
+						"posts"
+					],
+					"query": [
+						{
+							"key": "_embed",
+							"value": ""
+						},
+						{
+							"key": "slug",
+							"value": "spice-sector-plans-to-enhance-its-potential-and-scope-in-assam"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

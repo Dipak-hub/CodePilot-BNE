@@ -5,6 +5,7 @@ import Routes from './app/navigation/Routes'
 import store from './app/store/store'
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
+import colors from './app/utils/responsive/colors'
 
 let persistor = persistStore(store);
 
@@ -13,7 +14,7 @@ function App() {
     <Provider store={store}>
         <PersistGate persistor={persistor}>
     <View style={{flex:1}}>
-      <StatusBar backgroundColor={'#c23c45'} />
+      <StatusBar backgroundColor={colors.primary} />
       <Routes/>
     </View>
     </PersistGate>

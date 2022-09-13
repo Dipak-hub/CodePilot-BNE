@@ -1,4 +1,4 @@
-import { useSelect } from '@mui/base'
+
 import { useNavigation } from '@react-navigation/native'
 import axios from 'axios'
 import React, { useState } from 'react'
@@ -7,11 +7,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import Header from '../Component/Header'
 import { sendOtp } from '../store/slice/auth-slice'
 import { heightToDp, scale, widthToDp } from '../utils'
+import colors from '../utils/responsive/colors'
 function LoginScreen() {
 const navigation=useNavigation()
 const dispatch=useDispatch()
   const[borderBottomColor,setBottomBorderColor]=useState('gray')
   const [phoneNumber, setPhoneNumber] = useState('');
+
+  const {loading,isLoggedIn}=useSelector((state)=>state.auth)
+
+ console.log(isLoggedIn)
   const handleFocus=()=>{
     setBottomBorderColor('green')
   }
@@ -23,8 +28,8 @@ const dispatch=useDispatch()
   }
 
   const getOtp=()=>{
-
     dispatch(sendOtp(phoneNumber)).unwrap().then(()=>{
+      
       navigation.navigate('OtpScreen')
     }).catch((e)=>{
      alert('Something went wrong!!!!')
@@ -87,7 +92,7 @@ const styles=StyleSheet.create({
       justifyContent: 'center',
       width: '95%',
       height: heightToDp(6),
-    backgroundColor:'#c23c45',
+    backgroundColor:colors.primary,
       alignItems: 'center',
   },
   buttonText:{
