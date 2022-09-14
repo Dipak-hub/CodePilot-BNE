@@ -26,13 +26,32 @@ function TopTabNavigator() {
     }}
     >
     <Tab.Screen
-    name="HOME" component={HomeScreen} />
+    name="HOME" options={{
+      tabBarLabelStyle: { fontWeight: 'bold' },
+    }} component={HomeScreen} />
     <Tab.Screen
+    options={{
+      tabBarLabelStyle: { fontWeight: 'bold' },
+    }}
     name="VIDEO" component={Video} />
-    <Tab.Screen  name="ARTICLE" component={Article} />
-    <Tab.Screen name="NORTHEAST" component={Northeast} />
-    <Tab.Screen name="NATIONAL" component={National} />
-    <Tab.Screen name="INTERNATIONAL" component={International} />
+    <Tab.Screen  options={{
+      tabBarLabelStyle: { fontWeight: 'bold' },
+    }}  name="ARTICLE" component={Article} />
+    <Tab.Screen 
+    options={{
+      tabBarLabelStyle: { fontWeight: 'bold' },
+    }}
+    name="NORTHEAST" component={Northeast} />
+    <Tab.Screen
+    options={{
+      tabBarLabelStyle: { fontWeight: 'bold' },
+    }}
+    name="NATIONAL" component={National} />
+    <Tab.Screen
+    options={{
+      tabBarLabelStyle: { fontWeight: 'bold' },
+    }}
+    name="INTERNATIONAL" component={International} />
   </Tab.Navigator>
   )
 }

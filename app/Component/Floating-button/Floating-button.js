@@ -23,7 +23,7 @@ function toggleMenu(){
 const Floatingbutton = () => {
 
 
-    const pinStyle={
+    const twitter={
         transform:[
             
                 {scale:animation},
@@ -37,7 +37,7 @@ const Floatingbutton = () => {
         ]
     }
 
-    const thumbStyle={
+    const facebook={
         transform:[
             
                 {scale:animation},
@@ -51,7 +51,7 @@ const Floatingbutton = () => {
         ]
     }
 
-    const heartStyle={
+    const whatsapp={
         transform:[
             
                 {scale:animation},
@@ -75,20 +75,26 @@ const Floatingbutton = () => {
         }
     ]
 }
+
+//twitterIconPressed 
+
+const handleTwitterPress=()=>{
+    console.log("Pressed")
+}
   return (
     <View style={styles.container}>
          <TouchableWithoutFeedback>
-        <Animated.View style={[styles.button,styles.secondary,heartStyle]}>
+        <Animated.View style={[styles.button,styles.secondary,whatsapp]}>
            <MaterialCommunityIcons name='whatsapp' color={'#c23c45'} size={30}/>
         </Animated.View>
     </TouchableWithoutFeedback>
     <TouchableWithoutFeedback>
-        <Animated.View style={[styles.button,styles.secondary,thumbStyle]}>
+        <Animated.View style={[styles.button,styles.secondary,facebook]}>
            <MaterialCommunityIcons name='facebook' color={'#c23c45'} size={30}/>
         </Animated.View>
     </TouchableWithoutFeedback>
-    <TouchableWithoutFeedback>
-        <Animated.View style={[styles.button,styles.secondary,pinStyle]}>
+    <TouchableWithoutFeedback onPress={()=>handleTwitterPress}>
+        <Animated.View style={[styles.button,styles.secondary,twitter]}>
            <MaterialCommunityIcons name='twitter' color={'#c23c45'} size={30}/>
         </Animated.View>
     </TouchableWithoutFeedback>

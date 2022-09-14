@@ -18,7 +18,7 @@ export const login = createAsyncThunk(
   'user-login',
   async (body, {rejectWithValue}) => {
     try{
-        const res=await axios.get(`http://2factor.in/API/V1/4cd1c359-d970-11eb-8089-0200cd936042/SMS/VERIFY/${body.details}/${body.otp}`)
+        const res=await axios.get(`https://2factor.in/API/V1/4cd1c359-d970-11eb-8089-0200cd936042/SMS/VERIFY/${body.details}/${body.otp}`)
         // console.log(res.data)
        return res.data
       }
@@ -32,7 +32,7 @@ export const sendOtp = createAsyncThunk(
   'send-otp',
   async (mobile_number, {rejectWithValue}) => {
     try{
-      const res=await axios.get(`http://2factor.in/API/V1/4cd1c359-d970-11eb-8089-0200cd936042/SMS/${mobile_number}/AUTOGEN`)
+      const res=await axios.get(`https://2factor.in/API/V1/4cd1c359-d970-11eb-8089-0200cd936042/SMS/${mobile_number}/AUTOGEN`)
       return res.data
     }
     catch(e){
