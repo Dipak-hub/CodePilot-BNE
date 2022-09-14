@@ -31,16 +31,18 @@ function DescriptionScreen({route}) {
      hasBackButton={true}/>
 {
   loading?(
+    <>
     <ScrollView style={styles.container}>
-    <Image resizeMode='contain'style={styles.bannerImage} source={{uri: data[0]?.yoast_head_json?.og_image[0]?.url}} ></Image>
+    <Image resizeMode='cover'style={styles.bannerImage} source={{uri: data[0]?.yoast_head_json?.og_image[0]?.url}} ></Image>
     <Text style={styles.headLine}>{data[0]?.title?.rendered}</Text>
     <View style={{borderBottomColor:'gray',borderBottomWidth:1,marginTop:widthToDp(5),flexDirection:'row'}}>
       <Image source={require('../assets/favicon.png')} style={{width:widthToDp(6),height:heightToDp(4)}}/>
-      <Text> {new Date(data[0]?.date).toDateString()}</Text>
+      <Text style={{color:'gray',marginTop:heightToDp(1)}}> {new Date(data[0]?.date).toDateString()}</Text>
 
     </View>
     <HtmlText style={styles.content} html={data[0]?.content?.rendered}></HtmlText>
     </ScrollView>
+    </>
   ):(
     <ActivityIndicator size={'large'} color={colors.primary} />
   )
@@ -54,9 +56,10 @@ const styles=StyleSheet.create({
     flexDirection:'column'
   },
   bannerImage:{
+    padding:0,
     width:widthToDp(100),
-    height:heightToDp(50),
-    marginTop:heightToDp(-2)
+    height:heightToDp(30),
+    margin:0,
   },
   headLine:{
     paddingLeft:widthToDp(2),
@@ -67,7 +70,8 @@ const styles=StyleSheet.create({
   },
   content:{
     padding:0,
-    marginBottom:widthToDp(-4)
+    marginBottom:widthToDp(-4),
+    color:'gray'
   }
 })
 export default DescriptionScreen
