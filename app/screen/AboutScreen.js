@@ -12,8 +12,11 @@ function AboutScreen() {
     // navigation.setOptions({tabBarStyle: {display: 'none'}});
   };
   return (
-    <View>
-  <Image resizeMode='contain' source={require('../assets/bne_about.jpg')} style={styles.aboutImage}></Image>
+    <>
+    <Image resizeMode='contain' source={require('../assets/bne_about.jpg')} style={styles.aboutImage}></Image>
+    <View style={{flexDirection:''}}>
+      <Text>Hi</Text>
+  
   <Text style={styles.content}> There is NO business portal addressing the potential of business capability of North East Region. We are taking the informative content data through social media platform to all citizens for their awareness and benefits.</Text>
         <Text style={styles.nextLineContent}>Focusing on providing more and more awareness to the citizens regarding Govt. policies and schemes to help, build &amp; encourage entrepreneurship.</Text>
 
@@ -21,16 +24,17 @@ function AboutScreen() {
 
         <Text  style={styles.nextLineContent}>  We envisaged ourselves to become service provider which is informative content based on researched data upon interacting with all sectors companies capturing their vision, growth as on continuous process and broadcast to the citizens.</Text>
   </View>
+  </>
   )
 }
 const styles=StyleSheet.create({
   aboutImage:{
-    padding:5,
+    flexShrink:1,
     width:widthToDp(100),
-    marginTop:heightToDp(-55)
+    // marginTop:heightToDp(-55)
   },
   content:{
-    marginTop:heightToDp(-50)
+    // marginTop:heightToDp(-50)
   },
   nextLineContent:{
     marginTop:heightToDp(5)
