@@ -20,7 +20,6 @@ function DescriptionScreen({route}) {
     setData(res.data)
     setLoading(true)
   }
-  console.log(data[0]?.title?.rendered)
   useEffect(()=>{
     fetchPostBySLug()
   },[])

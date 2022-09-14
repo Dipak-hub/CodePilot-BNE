@@ -4,6 +4,7 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 import Header from '../Component/Header';
 import { heightToDp, widthToDp } from '../utils';
+import FloatingButton from '../Component/Floating-button/Floating-button'
 
 function AboutScreen() {
 
@@ -27,6 +28,8 @@ function AboutScreen() {
 
         
   </View>
+  <FloatingButton />
+
   </>
   )
 }
