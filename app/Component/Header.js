@@ -62,7 +62,7 @@ const styles=StyleSheet.create({
       marginLeft:widthToDp(8)
     },
     textStyle:{
-        fontFamily:'open-sans',
+        // fontFamily:'open-sans',
         color:'white',
         fontSize:scale(5.5),
         fontWeight:'100'
