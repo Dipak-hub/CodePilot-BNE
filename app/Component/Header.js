@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { View,Text, StyleSheet, Image ,TouchableOpacity} from 'react-native'
+import { View,Text, StyleSheet, Image ,TouchableOpacity, SafeAreaView} from 'react-native'
 import {Appbar} from 'react-native-paper'
 import { heightToDp, scale, widthToDp } from '../utils'
 import colors from '../utils/responsive/colors'
@@ -9,7 +9,7 @@ function Header({hasLogo,hasBackButton,hasDrawer,openDrawer,hasScreenName,screeN
  
  const navigation=useNavigation()
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {
         hasDrawer &&(
         <Appbar.Action
@@ -45,7 +45,7 @@ function Header({hasLogo,hasBackButton,hasDrawer,openDrawer,hasScreenName,screeN
          
       )}
      
-    </View>
+    </SafeAreaView>
   )
 }
 const styles=StyleSheet.create({

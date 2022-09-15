@@ -5,6 +5,8 @@ import { color } from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native'
 
 const NewsCard = ({news}) => {
+   
+   
     const navigation=useNavigation()
 
     const handlePress=(slug)=>{
@@ -12,9 +14,14 @@ const NewsCard = ({news}) => {
     }
   return (
   
+  
     <TouchableOpacity onPress={()=>handlePress(news?.slug)} style={styles.Container}>
         <View>
-        <Image source={{uri:news?.yoast_head_json?.og_image[0]?.url}} style={styles.image} />
+        <Image source={news.yoast_head_json.og_image===undefined ?{
+            uri:'https://www.insticc.org/node/TechnicalProgram/56e7352809eb881d8c5546a9bbf8406e.png'
+        }:{
+            uri:news.yoast_head_json.og_image[0].url
+        }} style={styles.image} />
         </View>
         <View style={{flexDirection:'column'}}>
         <Text style={styles.headline}>{news?.title?.rendered}</Text>

@@ -32,14 +32,20 @@ function DescriptionScreen({route}) {
   loading?(
     <>
     <ScrollView style={styles.container}>
-    <Image resizeMode='cover'style={styles.bannerImage} source={{uri: data[0]?.yoast_head_json?.og_image[0]?.url}} ></Image>
+    <Image resizeMode='cover'style={styles.bannerImage}source={data[0].yoast_head_json.og_image===undefined ?{
+            uri:'https://www.insticc.org/node/TechnicalProgram/56e7352809eb881d8c5546a9bbf8406e.png'
+        }:{
+            uri:data[0].yoast_head_json.og_image[0].url
+        }}></Image>
     <Text style={styles.headLine}>{data[0]?.title?.rendered}</Text>
     <View style={{borderBottomColor:'gray',borderBottomWidth:1,marginTop:widthToDp(5),flexDirection:'row'}}>
       <Image source={require('../assets/favicon.png')} style={{width:widthToDp(6),height:heightToDp(4)}}/>
       <Text style={{color:'gray',marginTop:heightToDp(1)}}> {new Date(data[0]?.date).toDateString()}</Text>
 
     </View>
+    <View style={styles.contentContainer}>
     <HtmlText style={styles.content} html={data[0]?.content?.rendered}></HtmlText>
+    </View>
     </ScrollView>
     </>
   ):(
@@ -66,6 +72,9 @@ const styles=StyleSheet.create({
     fontSize:scale(4.8),
     color:'black',
     fontWeight:'bold',
+  },
+  contentContainer:{
+    padding:widthToDp(3)
   },
   content:{
     padding:0,

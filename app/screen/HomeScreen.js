@@ -19,11 +19,6 @@ function HomeScreen({navigation}) {
 
 
 
-  const fetchPosts=async()=>{
-    const res= await axios.get(`https://www.business-northeast.com/wp-json/wp/v2/posts?per_page=20&page=${page}&_embed`)
-    setAllPosts([...allPosts,...res.data])
-  }
- 
 
   const openDrawer = () => {
     navigation.dispatch(DrawerActions.openDrawer());
@@ -37,6 +32,12 @@ function HomeScreen({navigation}) {
   
   const [allPosts,setAllPosts]=useState([])
 
+  
+  const fetchPosts=async()=>{
+    const res= await axios.get(`https://www.business-northeast.com/wp-json/wp/v2/posts?per_page=20&page=${page}&_embed`)
+    setAllPosts([...allPosts,...res.data])
+  }
+ 
    const fetchMoreData=()=>{
    setPage(page+1)
   }

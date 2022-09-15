@@ -14,6 +14,7 @@ const PostByCategory = ({route}) => {
     const [posts,setPosts]=useState([])
     const [page,setPage]=useState(10)
 
+    console.log(id)
 
     const fetchPostByCategory=async()=>{
       const res=await axios.get(`https://www.business-northeast.com/wp-json/wp/v2/posts?categories=${id}&_embed&per_page=${page}&filter[orderby]=date&order=desc`)
@@ -60,12 +61,12 @@ const PostByCategory = ({route}) => {
     </>
   )
 }
-
-export default PostByCategory
-
 const styles = StyleSheet.create({
   ActivityIndicator:{
     marginVertical:45,
     alignItems:'center'
   }
 })
+
+export default PostByCategory
+
