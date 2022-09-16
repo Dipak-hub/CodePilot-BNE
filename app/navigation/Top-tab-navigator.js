@@ -18,7 +18,7 @@ function TopTabNavigator() {
     <Tab.Navigator
     screenOptions={{
       tabBarLabelStyle: { fontSize: 12 },
-      tabBarItemStyle: { width: widthToDp(28) },
+      tabBarItemStyle: { width: widthToDp(30) },
       tabBarScrollEnabled:true,
       tabBarIndicatorStyle:{
         backgroundColor:colors.primary

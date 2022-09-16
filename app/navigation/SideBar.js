@@ -21,6 +21,9 @@ function SideBar() {
     <Drawer.Screen
     options={{drawerLabel:'Home'}} name="BottomTab" component={BottomTabNavigator} />
       <Drawer.Screen
+      options={{
+        drawerItemStyle: { height: 0 }
+      }}
      name="Description" component={DescriptionScreen} />
   </Drawer.Navigator>
   );
