@@ -76,12 +76,14 @@ function renderYoutube(){
     // console.log(text.length)
     const myArray = text.split(" ");
 
-    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/
     var match = text.match(regExp);
-    if (match && match[2].length == 11) {
-      setLink(match[2])
+
+    // console.log(match[2].slice(0,11))
+    if (match) {
+      setLink(match[2].slice(0,11))
     } else {
-      //error
+      console.log("Not found")
     }
     
     // var x = 0, y=0;
