@@ -12,12 +12,13 @@ function DescriptionScreen({route}) {
   const {slug}=route.params
 
   const [data,setData]=useState({})
-
+  const [link,setLink]=useState('')
   const [loading,setLoading]=useState(false)
 
   const fetchPostBySLug=async()=>{
     const res=await axios.get(`https://www.business-northeast.com/wp-json/wp/v2/posts?_embed&slug=${slug}`)
     setData(res.data)
+    setLink(res.data[0].link)
     setLoading(true)
   }
   useEffect(()=>{
@@ -25,12 +26,16 @@ function DescriptionScreen({route}) {
   },[])
   return (
 <>
-    <Header
-     hasLogo={false}
-     hasBackButton={true}/>
+    
 {
   loading?(
     <>
+    <Header
+    link={link}
+     hasLogo={false}
+     hasBackButton={true}
+     hasShareButton={true}
+     />
     <ScrollView style={styles.container}>
     <Image resizeMode='cover'style={styles.bannerImage}source={data[0].yoast_head_json.og_image===undefined ?{
             uri:'https://www.insticc.org/node/TechnicalProgram/56e7352809eb881d8c5546a9bbf8406e.png'

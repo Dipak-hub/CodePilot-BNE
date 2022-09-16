@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,Animated,TouchableWithoutFeedback, Image} from 'react-native'
+import { StyleSheet, Text, View,Animated,TouchableWithoutFeedback, Image,Linking} from 'react-native'
 import React, { useState } from 'react'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
@@ -15,7 +15,7 @@ function toggleMenu(){
  Animated.spring(animation,{
      toValue,
      friction:5,
-     useNativeDriver: true
+     useNativeDriver: false
 
  }).start()
  open=!open
@@ -83,17 +83,17 @@ const handleTwitterPress=()=>{
 }
   return (
     <View style={styles.container}>
-         <TouchableWithoutFeedback>
+         <TouchableWithoutFeedback onPress={()=>Linking.openURL("https://api.whatsapp.com/send/?phone=916026176848&text&app_absent=0")}>
         <Animated.View style={[styles.button,styles.secondary,whatsapp]}>
            <MaterialCommunityIcons name='whatsapp' color={'#c23c45'} size={30}/>
         </Animated.View>
     </TouchableWithoutFeedback>
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={()=>Linking.openURL("https://www.facebook.com/businessssnortheast/")}>
         <Animated.View style={[styles.button,styles.secondary,facebook]}>
            <MaterialCommunityIcons name='facebook' color={'#c23c45'} size={30}/>
         </Animated.View>
     </TouchableWithoutFeedback>
-    <TouchableWithoutFeedback onPress={()=>handleTwitterPress}>
+    <TouchableWithoutFeedback onPress={()=>Linking.openURL("https://twitter.com/BusinessNorthe1")}>
         <Animated.View style={[styles.button,styles.secondary,twitter]}>
            <MaterialCommunityIcons name='twitter' color={'#c23c45'} size={30}/>
         </Animated.View>

@@ -27,15 +27,23 @@ function HomeScreen({navigation}) {
   const dispatch=useDispatch()
   const [page,setPage]=useState(1)
   const [refresh,setRefresh]=useState(false)
+  
 
   const {categories,is_loading,}=useSelector((state)=>state.categories)
   
   const [allPosts,setAllPosts]=useState([])
+  const [link,setLink]=useState('')
 
   
   const fetchPosts=async()=>{
     const res= await axios.get(`https://www.business-northeast.com/wp-json/wp/v2/posts?per_page=20&page=${page}&_embed`)
     setAllPosts([...allPosts,...res.data])
+  }
+
+  const fetchVideos=async()=>{
+    let word="src=\"https://www.youtube.com/embed"
+    const response = await axios.get(`https://www.business-northeast.com/wp-json/wp/v2/posts?categories=7051&_embed&per_page=${page}&filter[orderby]=date&order=desc`)
+   findFirstVideo(response.data[0].content.rendered, word)
   }
  
    const fetchMoreData=()=>{
@@ -44,7 +52,8 @@ function HomeScreen({navigation}) {
 
 function renderYoutube(){
   return(
-    <YoutubeComponent />
+    <YoutubeComponent
+    id={link} />
   )
 }
 
@@ -63,9 +72,45 @@ function renderYoutube(){
    setRefresh(false)
   }
 
+  function findFirstVideo(text, word){
+    // console.log(text.length)
+    const myArray = text.split(" ");
+
+    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = text.match(regExp);
+    if (match && match[2].length == 11) {
+      setLink(match[2])
+    } else {
+      //error
+    }
+    
+    // var x = 0, y=0;
+   
+    // for (i=0;i< text.length;i++)
+    //     {
+    //     if(text[i] == word[0])
+    //         {
+    //           console.log(text)
+    //         for(j=i;j< i+word.length;j++)
+    //            {
+    //             if(text[j]==word[j-i])
+    //               {
+    //                 y++;
+    //               }
+    //             if (y==word.length){
+    //                 x++;
+    //             }
+    //         }
+    //         y=0;
+    //     }
+    // }
+    // console.log("'"+word+"' was found "+x+" times.");
+}
+
   useEffect(()=>{
     dispatch(getCategories())
     fetchPosts()
+    fetchVideos()
   },[page])
 
 
@@ -73,6 +118,7 @@ function renderYoutube(){
     <>
 <SafeAreaView style={{flex: 1}}>
     <FlatList
+    key={allPosts.id}
     contentContainerStyle={{flexGrow:1}}
     keyExtractor={item=>item.id}
     data={allPosts}

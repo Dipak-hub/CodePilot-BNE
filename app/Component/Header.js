@@ -1,13 +1,33 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { View,Text, StyleSheet, Image ,TouchableOpacity, SafeAreaView} from 'react-native'
+import { View,Text, StyleSheet, Image ,TouchableOpacity, SafeAreaView,Linking, Share} from 'react-native'
 import {Appbar} from 'react-native-paper'
 import { heightToDp, scale, widthToDp } from '../utils'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../utils/responsive/colors'
 
-function Header({hasLogo,hasBackButton,hasDrawer,openDrawer,hasScreenName,screeName}) {
- 
+function Header({hasLogo,hasBackButton,hasDrawer,openDrawer,hasScreenName,screeName,hasShareButton,link}) {
  const navigation=useNavigation()
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          link,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       {
@@ -44,6 +64,13 @@ function Header({hasLogo,hasBackButton,hasDrawer,openDrawer,hasScreenName,screeN
           ) 
          
       )}
+
+{hasShareButton?(
+  <TouchableOpacity onPress={()=>onShare()} style={styles.shareIcon}>
+      <MaterialCommunityIcons name='share-variant' size={30} />
+    </TouchableOpacity>
+):null}
+    
      
     </SafeAreaView>
   )
@@ -66,6 +93,9 @@ const styles=StyleSheet.create({
         color:'white',
         fontSize:scale(5.5),
         fontWeight:'100'
+    },
+    shareIcon:{
+      left:widthToDp(30)
     }
 })
 

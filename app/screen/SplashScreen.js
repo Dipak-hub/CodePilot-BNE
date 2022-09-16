@@ -38,7 +38,7 @@ function SplashScreen() {
     <View style={styles.container}>
       <Image
       style={styles.image}
-      source={require('../assets/logo_bne_white.jpg')}
+      source={require('../assets/logo.jpg')}
       resizeMode='contain'
       />
         </View>
