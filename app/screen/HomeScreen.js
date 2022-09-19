@@ -54,8 +54,9 @@ function HomeScreen({navigation}) {
 
 function renderYoutube(){
   return(
+    isLoadingFinished?
     <YoutubeComponent
-    id={link} />
+    id={link} />:null
   )
 }
 
