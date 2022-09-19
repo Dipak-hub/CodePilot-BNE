@@ -33,11 +33,13 @@ function HomeScreen({navigation}) {
   
   const [allPosts,setAllPosts]=useState([])
   const [link,setLink]=useState('')
+  const [isLoadingFinished,setIsLoadingFinished]=useState(false)
 
   
   const fetchPosts=async()=>{
     const res= await axios.get(`https://www.business-northeast.com/wp-json/wp/v2/posts?per_page=20&page=${page}&_embed`)
     setAllPosts([...allPosts,...res.data])
+    setIsLoadingFinished(true)
   }
 
   const fetchVideos=async()=>{
@@ -59,7 +61,7 @@ function renderYoutube(){
 
   function renderLoader(){
     return(
-<View style={styles.ActivityIndicator}>
+      <View style={styles.ActivityIndicator}>
       <ActivityIndicator size={'large'} color={colors.primary} />
     </View>
     )

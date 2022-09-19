@@ -8,6 +8,7 @@ import Header from '../Component/Header'
 import { sendOtp } from '../store/slice/auth-slice'
 import { heightToDp, scale, widthToDp } from '../utils'
 import colors from '../utils/responsive/colors'
+import  { validatePhone } from '../utils/validation'
 function LoginScreen() {
 const navigation=useNavigation()
 const dispatch=useDispatch()
@@ -28,12 +29,21 @@ const dispatch=useDispatch()
   }
 
   const getOtp=()=>{
-    dispatch(sendOtp(phoneNumber)).unwrap().then(()=>{
+    if(phoneNumber.length!==10 ){
+      alert("Please Enter a 10 digit phone number")
+    }
+    else if(!validatePhone(phoneNumber)){
+      alert("Please Enter a valid phone number")
+    }
+    else{
+      dispatch(sendOtp(phoneNumber)).unwrap().then(()=>{
       
-      navigation.navigate('OtpScreen')
-    }).catch((e)=>{
-     alert('Something went wrong!!!!')
-    })
+        navigation.navigate('OtpScreen')
+      }).catch((e)=>{
+       alert('Something went wrong!!!!')
+      })
+    }
+   
     // try{
     //   const res=await axios.get(`http://2factor.in/API/V1/4cd1c359-d970-11eb-8089-0200cd936042/SMS/${phoneNumber}/AUTOGEN`)
     //   console.log(res.data)

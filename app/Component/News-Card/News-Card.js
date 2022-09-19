@@ -15,7 +15,7 @@ const NewsCard = ({news}) => {
   return (
   
   
-    <TouchableOpacity onPress={()=>handlePress(news?.slug)} style={styles.Container}>
+    <TouchableOpacity key={news.id} onPress={()=>handlePress(news?.slug)} style={styles.Container}>
         <View>
         <Image source={news.yoast_head_json.og_image===undefined ?{
             uri:'https://www.insticc.org/node/TechnicalProgram/56e7352809eb881d8c5546a9bbf8406e.png'
