@@ -1,5 +1,5 @@
 import React from 'react'
-import {View,Text,StyleSheet, StatusBar} from 'react-native'
+import {View,Text,StyleSheet, StatusBar, SafeAreaView} from 'react-native'
 import { Provider } from 'react-redux'
 import Routes from './app/navigation/Routes'
 import store from './app/store/store'
@@ -13,10 +13,10 @@ function App() {
   return (
     <Provider store={store}>
         <PersistGate persistor={persistor}>
-    <View style={{flex:1}}>
+    <SafeAreaView style={{flex:1}}>
       <StatusBar backgroundColor={colors.primary} />
       <Routes/>
-    </View>
+    </SafeAreaView>
     </PersistGate>
     </Provider>
  

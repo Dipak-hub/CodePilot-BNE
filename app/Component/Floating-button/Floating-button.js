@@ -14,7 +14,7 @@ function toggleMenu(){
 
  Animated.spring(animation,{
      toValue,
-     friction:5,
+     friction:6,
      useNativeDriver: false
 
  }).start()
@@ -64,6 +64,34 @@ const Floatingbutton = () => {
             
         ]
     }
+
+    const email={
+        transform:[
+            
+                {scale:animation},
+                {
+                    translateY: animation.interpolate({
+                        inputRange:[0,1],
+                        outputRange:[0,-260]
+                    })
+                }
+            
+        ]
+    }
+
+    const instagram={
+        transform:[
+            
+                {scale:animation},
+                {
+                    translateY: animation.interpolate({
+                        inputRange:[0,1],
+                        outputRange:[0,-320]
+                    })
+                }
+            
+        ]
+    }
    
    const rotation={
     transform:[
@@ -76,26 +104,31 @@ const Floatingbutton = () => {
     ]
 }
 
-//twitterIconPressed 
-
-const handleTwitterPress=()=>{
-    console.log("Pressed")
-}
   return (
     <View style={styles.container}>
+         <TouchableWithoutFeedback onPress={()=>Linking.openURL("https://www.instagram.com/_businessnortheast_/")}>
+        <Animated.View style={[styles.button,styles.secondary,instagram]}>
+           <MaterialCommunityIcons name='instagram' color={'#ffffff'} size={25}/>
+        </Animated.View>
+    </TouchableWithoutFeedback>
+         <TouchableWithoutFeedback onPress={()=>Linking.openURL("mailto:mail@business-northeast.com")}>
+        <Animated.View style={[styles.button,styles.secondary,email]}>
+           <MaterialCommunityIcons name='email' color={'#ffffff'} size={25}/>
+        </Animated.View>
+    </TouchableWithoutFeedback>
          <TouchableWithoutFeedback onPress={()=>Linking.openURL("https://api.whatsapp.com/send/?phone=916026176848&text&app_absent=0")}>
         <Animated.View style={[styles.button,styles.secondary,whatsapp]}>
-           <MaterialCommunityIcons name='whatsapp' color={'#c23c45'} size={30}/>
+           <MaterialCommunityIcons name='whatsapp' color={'#ffffff'} size={25}/>
         </Animated.View>
     </TouchableWithoutFeedback>
     <TouchableWithoutFeedback onPress={()=>Linking.openURL("https://www.facebook.com/businessssnortheast/")}>
         <Animated.View style={[styles.button,styles.secondary,facebook]}>
-           <MaterialCommunityIcons name='facebook' color={'#c23c45'} size={30}/>
+           <MaterialCommunityIcons name='facebook' color={'#ffffff'} size={25}/>
         </Animated.View>
     </TouchableWithoutFeedback>
     <TouchableWithoutFeedback onPress={()=>Linking.openURL("https://twitter.com/BusinessNorthe1")}>
         <Animated.View style={[styles.button,styles.secondary,twitter]}>
-           <MaterialCommunityIcons name='twitter' color={'#c23c45'} size={30}/>
+           <MaterialCommunityIcons name='twitter' color={'#ffffff'} size={25}/>
         </Animated.View>
     </TouchableWithoutFeedback>
     <TouchableWithoutFeedback onPress={()=>toggleMenu()}>
@@ -103,6 +136,7 @@ const handleTwitterPress=()=>{
           <Image source={require('../../assets/fab.png')} style={{height:heightToDp(10),width:widthToDp(25)}} />
         </Animated.View>
     </TouchableWithoutFeedback>
+    
     </View>
   )
 }
@@ -137,6 +171,7 @@ const styles = StyleSheet.create({
      secondary:{
         width:48,
         height:48,
-        borderRadius:48/2
+        borderRadius:48/2,
+        backgroundColor:'#c23c45'
      }
 })
