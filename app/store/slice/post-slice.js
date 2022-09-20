@@ -10,7 +10,9 @@ const initialState = {
 //   numberOfPage: "",
 posts: [],
   post: {},
-  all_posts:[]
+  all_posts:[],
+  first_video:{},
+  video_link:''
 };
 
 // get All Booking Complete trip-------------------
@@ -37,8 +39,19 @@ export const getAllPosts = createAsyncThunk(
   async (page, { rejectWithValue }) => {
     try {
       const response = await axios.get(`https://www.business-northeast.com/wp-json/wp/v2/posts?per_page=20&page=${page}&_embed`);
-      console.log(page)
-      console.log(response.data[0].id)
+      return response.data
+    } catch (error) {
+      rejectWithValue(error);
+    }
+  }
+);
+
+//find first video
+export const getFirstVideo = createAsyncThunk(
+  "get-first-video",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`https://www.business-northeast.com/wp-json/wp/v2/posts?categories=7051&_embed&per_page=1&filter[orderby]=date&order=desc`)
       return response.data
     } catch (error) {
       rejectWithValue(error);
@@ -82,6 +95,21 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
+    getVideoLink(state,action){
+      // const text=state.first_video[0].content_rendered
+      const text=(state.first_video[0]?.content?.rendered)
+
+      var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/
+    var match = text?.match(regExp);
+
+    // console.log(match[2].slice(0,11))
+    if (match) {
+      state.video_link=match[2].slice(0,11)
+     
+    } else {
+      console.log("Not found")
+    }
+    }
     // getCompletedTripById(state, action) {
     //   state.completed_trip = state.completed_trips.find(
     //     (item) => item._id === action.payload
@@ -147,8 +175,22 @@ const postsSlice = createSlice({
     state.error_message = null;
   },
 
+  [getFirstVideo.fulfilled]:(state,action)=>{
+    state.first_video=action.payload;
+    state.is_loading=false
+  },
+  [getFirstVideo.pending]: (state) => {
+    state.is_loading = true;
+    state.error_message = null;
+  },
+  [getFirstVideo.rejected]: (state, action) => {
+    state.is_loading = false;
+    state.error_message =
+      action.payload.message || "Something Went Wrong";
+  },
+
   },
 });
 
-// export const { getCompletedTripById } = completedTripsSlice.actions;
+export const { getVideoLink } = postsSlice.actions;
 export default postsSlice.reducer;

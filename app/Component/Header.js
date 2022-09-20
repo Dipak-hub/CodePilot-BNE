@@ -67,7 +67,7 @@ function Header({hasLogo,hasBackButton,hasDrawer,openDrawer,hasScreenName,screeN
 
 {hasShareButton?(
   <TouchableOpacity onPress={()=>onShare()} style={styles.shareIcon}>
-      <MaterialCommunityIcons name='share-variant' size={30} />
+      <MaterialCommunityIcons color={'white'} name='share-variant' size={30} />
     </TouchableOpacity>
 ):null}
     
